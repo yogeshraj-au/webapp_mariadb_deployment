@@ -1,0 +1,30 @@
+      - name: Install MySQL community repository
+        yum:
+          name: mariadb-server
+          state: present
+
+      - name: Copy file with owner and permission, using symbolic representation
+        ansible.builtin.copy:
+          src: scripts/mariadb-service.sh
+          dest: /opt/mariadb-service.sh
+          force: yes
+    
+      - name: Copy file with owner and permission, using symbolic representation
+        ansible.builtin.shell: chmod +x /opt/mariadb-service.sh; sh /opt/mariadb-service.sh
+        register: mariadboutput
+
+      - name: print the service output
+        debug:
+          msg: " {{ mariadboutput }} "
+      
+      - name: Create database user with name 'db_user' and password 'Passw0rd' with all database privileges
+        community.mysql.mysql_user:
+          name: " {{ db_usr }} "
+          password: "{{ db_usr_password }}"
+          priv: '*.*:ALL'
+          state: present
+
+      - name: Create a new database with name 'employee_db'
+        community.mysql.mysql_db:
+          name: "{{ db_name }}"
+          state: present

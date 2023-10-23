@@ -1,0 +1,5 @@
+---
+- hosts: docker_service_server
+  remote_user: root
+  roles:
+    - mysql_db

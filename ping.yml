@@ -1,0 +1,6 @@
+---
+- name: ping hosts
+  hosts: docker_servers
+  tasks:
+    - name: try ping
+      ping: 

@@ -1,0 +1,5 @@
+---
+- hosts: docker_service_servers
+  remote_user: root
+  roles:
+    - centos_packages

@@ -1,0 +1,8 @@
+---
+  - name: webapp-mysql-deployment
+    hosts: docker_service_server
+    gather_facts: true
+    roles:
+      - centos_packages
+      - mysql_db
+      - flask_app

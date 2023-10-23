@@ -1,0 +1,16 @@
+---
+# tasks file for flask_app
+      - name: Install multi python packages with version specifiers
+        pip:
+          name:
+            - flask
+            - flask-mysql
+          executable: pip3
+
+      - name: Copy file with owner and permission, using symbolic representation
+        ansible.builtin.copy:
+          src: files/app.py
+          dest: /opt/app.py
+
+      - name: start the flask app
+        ansible.builtin.shell: FLASK_APP=/opt/app.py nohup flask run --host=0.0.0.0 &

@@ -1,0 +1,29 @@
+---
+  - name: webapp-mysql-deployment
+    hosts: docker_service_server
+    gather_facts: true
+    tasks:
+
+
+      #- name: Start service mariadb, if not started
+        #ansible.builtin.service:
+          #name: mariadb
+          #state: started
+
+      
+      #- name: Simple select query to acme db
+        #community.mysql.mysql_query:
+          #login_db: employee_db
+          #query: "{{ queries }}"
+        #vars:
+          #queries:
+            #- CREATE TABLE employees (name VARCHAR(20));
+            #- INSERT INTO employees VALUES ('JOHN');
+      
+      - include_tasks: tasks/configure_mysql.yaml
+      - include_tasks: tasks/install_configure_mysql_flask.yaml
+
+
+      
+
+      
